@@ -4,7 +4,7 @@ class BaseConfig(object):
     ENV = 'dev'
 
     # POSTGRES
-    POSTGRES_URI = 'postgresql+psycopg2://postgres:vccloud123@10.3.53.23:5432/postgres'
+    POSTGRES_URI = 'postgresql+psycopg2://postgres:vccloud123@10.3.53.162:5432/postgres'
 
 
 class PublicApiConfig(BaseConfig):

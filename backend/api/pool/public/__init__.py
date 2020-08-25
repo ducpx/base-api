@@ -1,14 +1,11 @@
-from flask import Flask
+from backend.databases import Postgres
+from config import PublicApiConfig
+from backend.api.factory import Factory
 
+from .resources import RESOURCES
 
-def create_app():
-    app = Flask(__name__)
+sql_db = Postgres(PublicApiConfig.POSTGRES_URI)
 
-    @app.route('/')
-    def index():
-        return 'hello'
+factory = Factory(PublicApiConfig, sql_db=sql_db, resources=RESOURCES)
 
-    return app
-
-
-app = create_app()
+app = factory.create_app()

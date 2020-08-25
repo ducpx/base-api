@@ -1,7 +1,11 @@
-class BaseModel(object):
-    id = 10
-    name = 'BaseModel'
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, String
+
+Base = declarative_base()
 
 
-class User(BaseModel):
-    pass
+class BaseModel(Base):
+    __abstract__ = True
+
+    id = Column(String, primary_key=True)
+
