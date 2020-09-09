@@ -1,13 +1,29 @@
 import logging
+import os
 
 import click
 
 from backend.common.utils import log
+from backend.databases import Postgres
+from backend.databases import postgres as postgres_models
+from config import BaseConfig
+from migration.worker import MigrationWorker
+from seed import Seeder
 
 
 @click.group()
 def cli():
     pass
+
+
+@cli.command(short_help='Bootstrap app')
+def bootstrap():
+    print('bootstrap app'.upper())
+    print('Migration database')
+    message = input('comment: ')
+    os.system('alembic revision --autogenerate -m "{message}"'.format(message=message))
+    os.system('alembic upgrade head')
+    print('Generation CRUD api')
 
 
 @cli.command(short_help='Run a shell in the app context')
@@ -19,9 +35,22 @@ def shell(ipython_args):
 
     ip_config = load_default_config()
 
+    postgres_db = Postgres(uri=BaseConfig.POSTGRES_URI)
+    session = postgres_db.start_session()
+    ctx = dict(
+        postgres_db=postgres_db,
+        postgres_models=postgres_models,
+        session=session,
+        seeder=Seeder(postgres_db),
+        migration_worker=MigrationWorker(session),
+    )
     banner = 'Python %s on %s\n' % (sys.version, sys.platform)
+    if ctx:
+        banner += 'Objects created:'
+    for k, v in ctx.items():
+        banner += '\n    {0}: {1}'.format(k, v)
     ip_config.TerminalInteractiveShell.banner1 = banner
-    IPython.start_ipython(argv=ipython_args, config=ip_config)
+    IPython.start_ipython(argv=ipython_args, user_ns=ctx, config=ip_config)
 
 
 @cli.command(short_help='Run an api')
