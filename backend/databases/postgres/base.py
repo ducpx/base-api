@@ -124,8 +124,8 @@ class Person(object):
     name = Column(String(STRING_LENGTH['LONG']), index=True)
     email = Column(String(STRING_LENGTH['LONG']), index=True)
     address = Column(String(STRING_LENGTH['LONG']))
-    gender = Column(String(STRING_LENGTH['EX_SHORT']), index=True)
-    phone = Column(String(STRING_LENGTH['EX_SHORT']), index=True)
+    gender = Column(String(STRING_LENGTH['SHORT']), index=True)
+    phone = Column(String(STRING_LENGTH['SHORT']), index=True)
 
 
 event.listen(BaseModel, 'before_insert', model_oncreate_listener, propagate=True)

@@ -11,13 +11,10 @@ DATETIME_FORMAT = '%d/%m/%Y %H:%M:%S'
 
 STRING_LENGTH = {
     'UUID4': 36,
-    'EX_SHORT': 30,
     'SHORT': 50,
     'MEDIUM': 200,
     'LONG': 500,
-    'EX_LONG': 1000,
     'LARGE': 3000,
-    'EX_LARGE': 10000
 }
 
 DEFAULT_METHODS_PARAMS_LOCATION = {

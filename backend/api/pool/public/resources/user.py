@@ -41,5 +41,5 @@ class UserResource(PublicResource):
 
 
 RESOURCES = {
-    '/user/<string:machine_id>/backup-directories': UserResource
+    '/user': UserResource
 }

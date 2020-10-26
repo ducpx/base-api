@@ -4,4 +4,4 @@ from backend.common.schemas import BaseCreatingSchema
 
 
 class UserSchema(BaseCreatingSchema):
-    id = fields.String(required=True)
+    name = fields.String(required=True)

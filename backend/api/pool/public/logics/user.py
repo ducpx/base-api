@@ -1,12 +1,18 @@
 from backend.api.factory.base_logics import BaseLogic
+from backend.databases.postgres import User
 
 
 class UserLogic(BaseLogic):
 
-    # def get(self, machine_id):
-    #
-    #     return {'message': machine_id}
+    def get(self):
+        users = self.session.query(User).all()
+        for u in users:
+            print(u.id)
+        return {'message user logic was called': 1}
 
-    def post(self, machine_id, id):
-        print('Create directory in machine_id:', machine_id)
-        return {'message': id}
+    def post(self, name):
+        user = User()
+        user.name = name
+        self.session.add(user)
+        self.session.commit()
+        return {'user.id': user.id}

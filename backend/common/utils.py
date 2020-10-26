@@ -1,16 +1,9 @@
 import logging
 
 log = logging.getLogger('dev')
-# logger = logging.getLogger('dev')
-# logger.setLevel(logging.INFO)
-#
-# fileHandler = logging.FileHandler('test.log')
-# fileHandler.setLevel(logging.INFO)
-#
-# consoleHandler = logging.StreamHandler()
-# consoleHandler.setLevel(logging.INFO)
-#
-# logger.addHandler(fileHandler)
-# logger.addHandler(consoleHandler)
-#
-# logger.info('information message')
+
+
+def convert_string_to_datetime(string, formats):
+    value = None
+    for datetime_format in formats:
+        pass
